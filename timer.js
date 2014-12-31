@@ -1,4 +1,4 @@
-function countDown(opts){
+function Timer(opts){
 	
 	var noop = function(){};
 
@@ -48,7 +48,13 @@ function countDown(opts){
 		return t;
 	}
 
-	function clearTimer(){
+	function run(callback, countdown){
+		timerId = setTimeout(function(){
+			callback();
+		}, countdown);
+	}
+
+	function clear(){
 		clearTimeout(timerId);
 	}
 

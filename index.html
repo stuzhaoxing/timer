@@ -2,34 +2,31 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<title>count down</title>
+	<title>timer</title>
 </head>
 <body>
 
 </body>
 </html>
 
-<script src="countdown.js"></script>
+<script src="timer.js"></script>
 <script>
 	
-	var cd = new countDown({
-		from: 0,
-		to: 4000,
-		speed: 1000,
+	var t = new Timer({
+		time: 4000,
+		step: 1000,
 		autostart: false,
 		loop: false,
-		callback: function(){
-
-		},
-		complete: function(){
-
-		}
+		onStart: function(){},
+		onProcess: function(){},
+		onpause: function(){},
+		onComplete: function(){}
 	});
-
-	cd.start();
+/*
+	t.start();
 
 	setTimeout(function(){
-		cd.pause();
+		t.pause();
 	}, 1000);
-
+*/
 </script>
