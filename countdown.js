@@ -4,14 +4,16 @@ function countDown(opts){
 
 	var self = this;
 
+	var isActive = false;
+
 	var o = {
 
 		step: 100,
 
-		onProcess: function(a, b){
-			console.log(remainingTime);
-			console.log(b);
-		}
+		onStart: noop,
+		onProcess: noop,
+		onpause: noop,
+		onComplete: noop,
 	};
 
 	var timerId;
@@ -28,11 +30,11 @@ function countDown(opts){
 	/*
 
 	{
-		from: 0,
-		to: 4000,
+		time: 1000,
 		step: 1000,
 		autostart: false,
 		loop: false,
+
 		onStart: function(p){},
 		onProcess: function(p){},
 		onpause: function(p){},
@@ -42,9 +44,15 @@ function countDown(opts){
 	*/
 
 	function getTimestamp(){
-		var t = new Date().getTime();
+		var t = (new Date()).getTime();
 		return t;
 	}
+
+	function clearTimer(){
+		clearTimeout(timerId);
+	}
+
+
 
 	function step(){
 		remainingTime -= o.step;
@@ -56,7 +64,6 @@ function countDown(opts){
 	}
 
 	function pause(){
-		step();
 		var timestamp = getTimestamp();
 		remainingTime -= timestamp - startTimestamp;
 		console.log(remainingTime);
@@ -80,14 +87,23 @@ function countDown(opts){
 			pause();
 		},
 
+		toggle: function(){
+			if(isActive){
+				pause();
+			}else{
+				start();
+			}
+		},
+
 		//停止
 		stop: function(){
-
+			stop();
 		},
 
 		//重新开始
 		restart: function(){
-
+			stop();
+			start();
 		}
 	}
 
